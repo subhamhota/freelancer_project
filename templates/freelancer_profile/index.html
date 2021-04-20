@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="col">
+    <H3>Add Data</H3>
+    <form action="{% url 'freelancer_profile:home' %}" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" name="submit" value="Submit" class="btn btn-primary " id="submit-id-submit" />
+    </form>
+</div>
+
+
+<div class="row mt-5">
+    {% if freelancers %}
+        <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">URL</th>
+            <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for freelancer in freelancers %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{freelancer.name}}</td>
+                    <td>{{freelancer.phone}}</td>
+                    <td>{{freelancer.url}}</td>
+                    <td><a href="{% url 'freelancer_profile:get_image' freelancer.id %}">
+                        <button class="btn btn-primary">Get Images</button>
+                    </a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+        </table>
+    {% else %}
+
+        <h3>No Results Found</h3>
+
+    {% endif %}
+</div>
+
+
+{% endblock content %}

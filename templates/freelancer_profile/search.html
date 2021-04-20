@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+<div class="row mt-5">
+    {% if freelancers %}
+        <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">URL</th>
+            <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for freelancer in freelancers %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{freelancer.name}}</td>
+                    <td>{{freelancer.phone}}</td>
+                    <td>{{freelancer.url}}</td>
+                    <td><a href="#">
+                        <button class="btn btn-primary">Get Images</button>
+                    </a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+        </table>
+    {% else %}
+
+        <h3>No Search Result Found</h3>
+
+    {% endif %}
+</div>
+
+
+{% endblock content %}
